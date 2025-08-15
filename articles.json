@@ -1,0 +1,87 @@
+{
+  "categories": ["前端", "後端", "工具", "基礎", "進階"],
+  "articles": [
+
+
+    {
+      "id": "00001-1",
+      "title": "HTML 基礎",
+      "description": "HTML (HyperText Markup Language) 是建立網頁和網路應用程式的標準標記語言。",
+      "url": "./articles/00001-1.html",
+      "tags": ["前端", "基礎"]
+    },
+    {
+      "id": "00001-2",
+      "title": "HTML 進階",
+      "description": "這是一篇關於 HTML 進階主題的文章內容，例如語義化標籤、Web Components、ARIA 屬性等。",
+      "url": "./articles/00001-2.html",
+      "tags": ["前端", "進階"]
+    },
+
+
+    {
+      "id": "00002-1",
+      "title": "CSS 基礎",
+      "description": "CSS (Cascading Style Sheets) 是用來為標記語言（如 HTML）添加樣式（例如，字體、顏色、間距）的樣式表語言。",
+      "url": "./articles/00002-1.html",
+      "tags": ["前端", "基礎"]
+    },
+    {
+      "id": "00002-2",
+      "title": "CSS 進階",
+      "description": "這是一篇關於 CSS 進階主題的文章內容，例如 Flexbox、Grid、Sass/Less、CSS 變數、動畫等。",
+      "url": "./articles/00002-2.html",
+      "tags": ["前端", "進階"]
+    },
+
+
+    {
+      "id": "00003-1",
+      "title": "JavaScript 基礎",
+      "description": "JavaScript 是一種輕量級、解釋型或即時編譯型的程式語言，是網頁的核心技術之一。",
+      "url": "./articles/00003-1.html",
+      "tags": ["前端", "基礎"]
+    },
+    {
+      "id": "00003-2",
+      "title": "JavaScript 進階",
+      "description": "這是一篇關於 JavaScript 進階主題的文章內容，例如 ES6+ 特性、非同步程式設計、模組化、框架等。",
+      "url": "./articles/00003-2.html",
+      "tags": ["前端", "進階"]
+    },
+
+
+    {
+      "id": "00004-1",
+      "title": "Python 基礎",
+      "description": "Python 是一種高階、解釋型、通用型程式語言，以其簡潔清晰的語法而聞名。",
+      "url": "./articles/00004-1.html",
+      "tags": ["後端", "基礎"]
+    },
+    {
+      "id": "00004-2",
+      "title": "Python 進階",
+      "description": "這是一篇關於 Python 進階主題的文章內容，例如裝飾器、生成器、多執行緒/多進程、Web 框架等。",
+      "url": "./articles/00004-2.html",
+      "tags": ["後端", "進階"]
+    },
+
+
+    {
+      "id": "00005",
+      "title": "Git 基礎",
+      "description": "Git 是一個開源的分散式版本控制系統，用於追蹤檔案的變化，協調多人在同一個專案上的工作。",
+      "url": "./articles/00005.html",
+      "tags": ["工具", "基礎"]
+    },
+
+    
+    {
+      "id": "00006",
+      "title": "RAID 基礎",
+      "description": "RAID 技術與常見級別介紹",
+      "url": "articles/00006.html",
+      "tags": ["工具", "基礎"]
+    }
+  ]
+}

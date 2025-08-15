@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 基礎 - 知識庫</title>
+    <link rel="stylesheet" href="../css/textpage_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html">&larr; 返回首頁</a>
+        <h1>JavaScript 基礎</h1>
+        <p>JavaScript 是一種輕量級、解釋型或即時編譯型的程式語言，是網頁的核心技術之一。</p>
+        <p>以下是一些基本的 JavaScript 概念：</p>
+        <ul>
+            <li>變數 (Variables)</li>
+            <li>資料型別 (Data Types)</li>
+            <li>運算子 (Operators)</li>
+            <li>條件語句 (Conditional Statements)</li>
+            <li>迴圈 (Loops)</li>
+            <li>函數 (Functions)</li>
+        </ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedColors = JSON.parse(localStorage.getItem('themeColors')) || {};
+            for (const key in savedColors) {
+                document.documentElement.style.setProperty(`--${key}`, savedColors[key]);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAID 基礎 - 知識庫</title>
+    <link rel="stylesheet" href="../css/textpage_style.css">
+    <style>
+        @keyframes slideInFromLeft {
+            0% { transform: translateX(-100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        #animation-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh; /* 確保有足夠的空間來展示動畫 */
+            overflow: hidden; /* 隱藏溢出內容 */
+        }
+
+
+        
+
+        
+
+
+        /* RAID 動畫樣式 */
+        .raid-animation {
+            margin: 40px 0;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .disk-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .disk {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #666;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid #444;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .disk::before {
+            content: 'HDD';
+            position: absolute;
+            font-size: 0.8em;
+            bottom: 5px;
+        }
+
+        .data-blocks-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .data-block {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            opacity: 0;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.8s ease-out; /* Add transition for smooth animation */
+        }
+
+        /* Initial state for JavaScript controlled animation */
+        .data-block.block-a, .data-block.block-b, .data-block.block-c, .data-block.block-a-copy {
+            opacity: 0;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        /* Animation states for JavaScript controlled animation */
+        .data-block.animate {
+            opacity: 1;
+            top: 60px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="animation-container">
+        <div class="container">
+        <a href="../index.html">&larr; 返回首頁</a>
+        <h1>RAID 基礎：資料儲存的超級英雄！</h1>
+        <p>想像一下，你的重要資料就像珍貴的寶藏，你當然不希望它因為單一的意外而消失不見吧？這時候，RAID（Redundant Array of Independent Disks，獨立磁碟冗餘陣列）就登場了！它就像一位資料儲存的超級英雄，將多個硬碟巧妙地組合起來，不僅能保護你的資料，還能讓它們跑得更快！</p>
+        
+        <h2>RAID 的超能力：為什麼你需要它？</h2>
+        <ul>
+            <li><strong>資料冗餘 (Data Redundancy)</strong>：這是 RAID 最重要的超能力！它能把你的資料複製多份，分散儲存在不同的硬碟上。即使其中一個硬碟不幸「罷工」了，你的寶藏依然安然無恙，不會丟失！</li>
+            <li><strong>效能提升 (Performance Enhancement)</strong>：RAID 不僅是個保鑣，還是個速度狂！它能讓多個硬碟同時讀寫資料，就像多條高速公路同時運作，資料傳輸速度瞬間飆升，讓你體驗飛一般的感覺！</li>
+            <li><strong>儲存容量擴展 (Storage Capacity Expansion)</strong>：你的資料越來越多，單一硬碟不夠用了怎麼辦？RAID 能把多個小硬碟變成一個超大的「儲物櫃」，輕鬆擴展你的儲存空間，再多資料也不怕！</li>
+        </ul>
+
+        <h2>RAID 家族成員：認識不同的超級英雄組合</h2>
+        <p>RAID 家族有許多不同的成員，每個成員都有其獨特的技能組合，適用於不同的任務：</p>
+        <dl>
+            <dt><strong>RAID 0 (條帶化 - Striping)</strong></dt>
+            <dd>
+                <p><strong>速度之王！</strong> 它將資料切成小塊，分散寫入所有硬碟。讀寫速度快到飛起，就像多個工人同時搬運貨物，效率極高！但請注意，它沒有任何資料備份，只要一個硬碟壞了，所有資料就跟著說掰掰了，風險較高。</p>
+                <p><em>適用情境：對速度要求極高，但資料丟失影響不大的場合，例如暫存檔、影音編輯等。</em></p>
+                <div class="raid-animation raid-0-animation">
+                    <div class="disk-container">
+                        <div class="disk"></div>
+                        <div class="disk"></div>
+                        <div class="disk"></div>
+                    </div>
+                    <div class="data-blocks-container">
+                        <div class="data-block block-a">A</div>
+                        <div class="data-block block-b">B</div>
+                        <div class="data-block block-c">C</div>
+                    </div>
+                </div>
+            </dd>
+            
+            <dt>RAID 1 (鏡像)</dt>
+            <dd>
+                <p>將相同的數據同時寫入兩塊或多塊硬碟，提供數據冗餘。如果一塊硬碟損壞，數據仍然可以從另一塊硬碟中讀取。RAID 1的可用容量是所有硬碟中最小的那塊的容量。</p>
+                <div class="raid-animation raid-1-animation">
+                    <div class="disk-container">
+                        <div class="disk"></div>
+                        <div class="disk"></div>
+                    </div>
+                    <div class="data-blocks-container"></div>
+                </div>
+            </dd>
+
+            <dt>RAID 5 (帶奇偶校驗的條帶化)</dt>
+            <dd>
+                <p><strong>平衡大師！</strong> 它在資料分散寫入的同時，還會計算並儲存「奇偶校驗」資訊。這就像為資料加上了一層保護罩，允許一個硬碟故障而資料不丟失。它在效能和冗餘之間取得了很好的平衡，是企業中最常用的 RAID 級別之一。</p>
+                <p><em>適用情境：需要兼顧效能和資料安全性的場合，例如檔案伺服器、應用程式伺服器等。</em></p>
+                <p>將數據和奇偶校驗信息分佈到所有硬碟上。它至少需要三塊硬碟，允許其中一塊硬碟損壞而不丟失數據。RAID 5在性能、冗餘和容量之間取得了很好的平衡。</p>
+                <div class="raid-animation raid-5-animation">
+                    <div class="disk-container">
+                        <div class="disk"></div>
+                        <div class="disk"></div>
+                        <div class="disk"></div>
+                        <div class="disk"></div>
+                    </div>
+                    <div class="data-blocks-container"></div>
+                </div>
+            </dd>
+
+            <dt>RAID 6 (雙奇偶校驗的條帶化)</dt>
+            <dd>
+                <p><strong>雙重保險！</strong> 這是 RAID 5 的升級版，它儲存了兩份奇偶校驗資訊。這意味著即使有兩個硬碟同時故障，你的資料依然安全！雖然儲存空間會再少一些，但安全性大大提升。</p>
+                <p><em>適用情境：對資料安全性有極高要求，且硬碟數量較多的場合。</em></p>
+
+                <p>類似於RAID 5，但增加了第二個獨立的奇偶校驗塊，分佈在所有硬碟上。這意味著RAID 6可以承受兩塊硬碟同時損壞而不丟失數據。它至少需要四塊硬碟，提供更高的數據安全性。</p>
+            </dd>
+
+            <dt>RAID 10 (RAID 1+0)</dt>
+            <dd>
+                <p><strong>效能與安全的完美結合！</strong> 它是 RAID 1 和 RAID 0 的組合拳。先將資料鏡像備份（RAID 1），再將這些鏡像組進行條帶化（RAID 0）。這提供了極高的讀寫效能和卓越的資料冗餘。當然，它的成本也相對較高，需要至少四個硬碟。</p>
+                <p><em>適用情境：對效能和資料安全性都有極致要求的關鍵應用，例如大型資料庫、虛擬化環境等。</em></p>
+
+                <p>結合了RAID 1的鏡像和RAID 0的條帶化。它至少需要四塊硬碟，將數據先鏡像（RAID 1），然後再將鏡像的數據條帶化（RAID 0）。RAID 10提供了出色的性能和數據冗餘，但成本較高。</p>
+                <div class="raid-animation raid-10-animation">
+                    <div class="disk-container">
+                        <div class="disk"></div>
+                        <div class="disk"></div>
+                        <div class="disk"></div>
+                        <div class="disk"></div>
+                    </div>
+                    <div class="data-blocks-container"></div>
+                </div>
+            </dd>
+        </dl>
+    </div>
+
+    <script src="../lib/anime.js"></script>
+    <script src="../js/textpage_script.js"></script>
+    <script src="../js/raid_animation.js"></script>
+</body>
+</html>

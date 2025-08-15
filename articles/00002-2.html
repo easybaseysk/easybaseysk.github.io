@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 進階</title>
+    <link rel="stylesheet" href="../css/textpage_style.css">
+</head>
+<body>
+    <div class="container">
+    <a href="../index.html">&larr; 返回首頁</a>
+    <header>
+        <h1>CSS 進階</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Flexbox 彈性盒子</h2>
+            <p>Flexbox 是一種一維佈局方法，用於在單個方向（行或列）上排列項目。它使得在容器中對齊項目、分配空間變得非常容易。</p>
+            <h3>基本概念</h3>
+            <ul>
+                <li>**容器 (Flex Container)**：應用 `display: flex` 或 `display: inline-flex` 的元素。</li>
+                <li>**項目 (Flex Items)**：容器的直接子元素。</li>
+                <li>**主軸 (Main Axis)**：Flexbox 佈局的主要方向（預設為水平）。</li>
+                <li>**交叉軸 (Cross Axis)**：垂直於主軸的方向（預設為垂直）。</li>
+            </ul>
+            <h3>常用屬性</h3>
+            <p>容器屬性：</p>
+            <ul>
+                <li>`flex-direction`: 設置主軸方向（`row`, `row-reverse`, `column`, `column-reverse`）。</li>
+                <li>`justify-content`: 沿主軸對齊項目（`flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `space-evenly`）。</li>
+                <li>`align-items`: 沿交叉軸對齊項目（`flex-start`, `flex-end`, `center`, `baseline`, `stretch`）。</li>
+                <li>`flex-wrap`: 控制項目是否換行（`nowrap`, `wrap`, `wrap-reverse`）。</li>
+            </ul>
+            <p>項目屬性：</p>
+            <ul>
+                <li>`flex-grow`: 定義項目在主軸方向上佔據剩餘空間的比例。</li>
+                <li>`flex-shrink`: 定義項目在空間不足時縮小的比例。</li>
+                <li>`flex-basis`: 定義項目在分配剩餘空間之前的初始大小。</li>
+                <li>`flex`: `flex-grow`, `flex-shrink`, `flex-basis` 的簡寫。</li>
+                <li>`align-self`: 覆蓋容器的 `align-items` 屬性，單獨對齊項目。</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Grid 網格佈局</h2>
+            <p>CSS Grid 是一種二維佈局系統，可以同時處理行和列，非常適合創建複雜的網頁佈局。</p>
+            <h3>基本概念</h3>
+            <ul>
+                <li>**網格容器 (Grid Container)**：應用 `display: grid` 或 `display: inline-grid` 的元素。</li>
+                <li>**網格項目 (Grid Items)**：容器的直接子元素。</li>
+                <li>**網格線 (Grid Lines)**：構成網格的水平和垂直分隔線。</li>
+                <li>**網格軌道 (Grid Tracks)**：網格線之間的空間，即行或列。</li>
+                <li>**網格單元格 (Grid Cells)**：網格軌道交叉形成的最小單位。</li>
+                <li>**網格區域 (Grid Areas)**：由多個網格單元格組成的矩形區域。</li>
+            </ul>
+            <h3>常用屬性</h3>
+            <p>容器屬性：</p>
+            <ul>
+                <li>`grid-template-columns`: 定義列的數量和大小。</li>
+                <li>`grid-template-rows`: 定義行的數量和大小。</li>
+                <li>`grid-gap` (或 `gap`)：設置網格線之間的間距。</li>
+                <li>`justify-items`, `align-items`, `place-items`: 控制網格項目在單元格內的對齊方式。</li>
+                <li>`justify-content`, `align-content`, `place-content`: 控制網格軌道在容器內的對齊方式。</li>
+                <li>`grid-template-areas`: 使用命名網格區域來定義佈局。</li>
+            </ul>
+            <p>項目屬性：</p>
+            <ul>
+                <li>`grid-column-start`, `grid-column-end`, `grid-row-start`, `grid-row-end`: 定義項目跨越的網格線。</li>
+                <li>`grid-column`, `grid-row`: `start` 和 `end` 的簡寫。</li>
+                <li>`grid-area`: 使用命名網格區域來放置項目。</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Sass/Less CSS 預處理器</h2>
+            <p>Sass (Syntactically Awesome Style Sheets) 和 Less 都是 CSS 預處理器，它們擴展了 CSS 的功能，使其更像一種程式語言，提供了變數、巢狀規則、混入 (mixins)、函數等特性，提高了 CSS 的可維護性和開發效率。</p>
+            <h3>主要特性</h3>
+            <ul>
+                <li>**變數 (Variables)**：定義可重複使用的值，如顏色、字體大小等。</li>
+                <li>**巢狀規則 (Nesting)**：允許 CSS 選擇器像 HTML 結構一樣巢狀，減少重複。</li>
+                <li>**混入 (Mixins)**：定義可重用的樣式塊，避免重複編寫相同的 CSS 規則。</li>
+                <li>**函數 (Functions)**：提供一些內建函數或自定義函數來處理顏色、數值等。</li>
+                <li>**繼承/擴展 (Extend/Inheritance)**：允許一個選擇器繼承另一個選擇器的所有樣式。</li>
+                <li>**部分檔案 (Partials)**：將 CSS 分割成更小的、可管理的檔案，然後導入到主檔案中。</li>
+            </ul>
+            <h3>範例 (Sass)</h3>
+            <pre><code class="language-scss">$primary-color: #337ab7;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.button {
+  background-color: $primary-color;
+  color: white;
+  padding: 10px 20px;
+  @include border-radius(5px);
+
+  &amp;:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>CSS 變數 (Custom Properties)</h2>
+            <p>CSS 變數允許您在 CSS 中定義可重複使用的值，並在整個樣式表中引用它們。這使得樣式表的維護更加容易，特別是在需要更改多個地方的相同值時。</p>
+            <h3>定義與使用</h3>
+            <ul>
+                <li>**定義**：使用 `--` 前綴來定義變數，通常在 `:root` 選擇器中定義全局變數。</li>
+                <li>**使用**：使用 `var()` 函數來引用變數。</li>
+            </ul>
+            <h3>範例</h3>
+            <pre><code class="language-css">:root {
+  --main-color: #007bff;
+  --panel-background: #f8f9fa;
+}
+
+.header {
+  background-color: var(--main-color);
+  color: white;
+}
+
+.panel {
+  background-color: var(--panel-background);
+  border: 1px solid var(--main-color);
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>CSS 動畫 (Animations)</h2>
+            <p>CSS 動畫允許您創建複雜的動畫序列，而無需使用 JavaScript。它基於關鍵幀 (keyframes) 概念，您可以定義動畫在不同時間點的樣式。</p>
+            <h3>主要屬性</h3>
+            <ul>
+                <li>`@keyframes`: 定義動畫的關鍵幀。</li>
+                <li>`animation-name`: 指定要綁定到選擇器的關鍵幀名稱。</li>
+                <li>`animation-duration`: 動畫完成一個週期所需的時間。</li>
+                <li>`animation-timing-function`: 動畫的速度曲線。</li>
+                <li>`animation-delay`: 動畫開始前的延遲時間。</li>
+                <li>`animation-iteration-count`: 動畫重複的次數。</li>
+                <li>`animation-direction`: 動畫是否應該輪流反向播放。</li>
+                <li>`animation-fill-mode`: 動畫在執行之前和之後的樣式。</li>
+                <li>`animation-play-state`: 動畫是運行還是暫停。</li>
+            </ul>
+            <h3>範例</h3>
+            <pre><code class="language-css">@keyframes slidein {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  animation-name: slidein;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}</code></pre>
+        </section>
+      </div>
+    </main>
+  
+    <script src="../js/textpage_script.js"></script>
+</body>
+</html>

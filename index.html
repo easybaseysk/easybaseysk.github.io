@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>易識庫(線上知識庫)</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <header>
+        <h1>易識庫(線上知識庫)</h1>
+    </header>
+    <nav>
+        <a href="./">首頁</a>
+        <a href="#main">所有知識</a>
+        <a href="#" id="settingsBtn">設定</a>
+    </nav>
+    <div class="container" id="main">
+        <div class="search-bar">
+            <input type="text" placeholder="搜索知識..." id="search-input">
+        </div>
+        <div class="categories" id="categories-nav">
+            <!-- Categories will be dynamically loaded here -->
+        </div>
+        <div class="content-area">
+                <h2>知識文章</h2>
+                <div class="articles-container" id="articles-container">
+                    <!-- 文章將由 JavaScript 動態載入 -->
+                </div>
+            </div> 
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>網站設定</h2>
+            <button id="toggleAdvanced">進階設定</button>
+            
+            <div id="basicColors">
+                <label for="primaryColor">主要顏色 : <input type="color" id="primaryColor" value="#4a90e2"></label>
+                <label for="textColor">文字顏色 : <input type="color" id="textColor" value="#333"></label>
+                <label for="backgroundColor">背景顏色 : <input type="color" id="backgroundColor" value="#eef2f7"></label>
+                <button id="resetDefault">恢復預設</button>
+            </div>
+            
+            <div id="advancedColors" style="display:none;">
+                <label for="secondaryColor">次要顏色 : <input type="color" id="secondaryColor" value="#3a506b"></label>
+                <label for="containerBgColor">容器背景顏色 : <input type="color" id="containerBgColor" value="#ffffff"></label>
+                <label for="borderColor">邊框顏色 : <input type="color" id="borderColor" value="#cdd4e0"></label>
+                <label for="categoryItemBg">分類項目背景 : <input type="color" id="categoryItemBg" value="#e0e7ef"></label>
+                <label for="contentAreaBg">內容區域背景 : <input type="color" id="contentAreaBg" value="#f8f9fa"></label>
+            </div>
+        </div>
+    </div>
+    <script src="./js/index.js"></script>
+
+</body>
+</html>
+    

@@ -1,0 +1,24 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+h1 {
+    color: var(--textColor);
+}
+a {
+    color: var(--textColor);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}

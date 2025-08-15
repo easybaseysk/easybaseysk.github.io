@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 進階</title>
+    <link rel="stylesheet" href="../css/textpage_style.css">
+</head>
+<body>
+    <div class="container">
+    <a href="../index.html">&larr; 返回首頁</a>
+    <header>
+        <h1>Python 進階</h1>
+    </header>
+    <main>
+        <section>
+            <h2>裝飾器 (Decorators)</h2>
+            <p>裝飾器是 Python 中一個強大的功能，它允許您在不修改原始函數程式碼的情況下，為函數添加額外的功能。本質上，裝飾器是一個接受函數作為參數並返回一個新函數的函數。</p>
+            <h3>基本概念</h3>
+            <ul>
+                <li>**語法糖**：使用 `@decorator_name` 語法應用裝飾器。</li>
+                <li>**應用場景**：日誌記錄、性能分析、權限驗證、快取等。</li>
+            </ul>
+            <h3>範例</h3>
+            <pre><code class="language-python">def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("Something is happening before the function is called.")
+        result = func(*args, **kwargs)
+        print("Something is happening after the function is called.")
+        return result
+    return wrapper
+
+@my_decorator
+def say_hello(name):
+    print(f"Hello, {name}!")
+
+say_hello("Alice")
+
+# 輸出:
+# Something is happening before the function is called.
+# Hello, Alice!
+# Something is happening after the function is called.</code></pre>
+        </section>
+
+        <section>
+            <h2>生成器 (Generators)</h2>
+            <p>生成器是一種特殊的迭代器，它允許您延遲計算序列中的值，直到需要它們時才生成。這對於處理大量資料或無限序列非常有用，因為它節省了記憶體。</p>
+            <h3>基本概念</h3>
+            <ul>
+                <li>**`yield` 關鍵字**：生成器函數使用 `yield` 而不是 `return` 來返回值。每次 `yield` 時，函數會暫停執行並保存其狀態，下次調用時從上次暫停的地方繼續。</li>
+                <li>**惰性計算**：值是按需生成的，而不是一次性全部生成。</li>
+            </ul>
+            <h3>範例</h3>
+            <pre><code class="language-python">def fibonacci_sequence(n):
+    a, b = 0, 1
+    count = 0
+    while count < n:
+        yield a
+        a, b = b, a + b
+        count += 1
+
+# 使用生成器
+for num in fibonacci_sequence(10):
+    print(num, end=" ")
+
+# 輸出:
+# 0 1 1 2 3 5 8 13 21 34</code></pre>
+        </section>
+
+        <section>
+            <h2>多執行緒 (Multithreading) 與多進程 (Multiprocessing)</h2>
+            <p>在 Python 中，多執行緒和多進程是實現並行和並發的兩種主要方式，用於提高程式的執行效率。</p>
+            <h3>多執行緒 (Multithreading)</h3>
+            <ul>
+                <li>**概念**：在同一個進程中運行多個執行緒。執行緒共享相同的記憶體空間。</li>
+                <li>**GIL (Global Interpreter Lock)**：Python 的 GIL 限制了在任何給定時間只有一個執行緒可以執行 Python 字節碼，這使得多執行緒在 CPU 密集型任務上無法真正並行，但在 I/O 密集型任務上仍有優勢。</li>
+                <li>**適用場景**：網路請求、檔案讀寫等 I/O 密集型任務。</li>
+            </ul>
+            <h3>多進程 (Multiprocessing)</h3>
+            <ul>
+                <li>**概念**：創建多個獨立的進程，每個進程有自己的記憶體空間。</li>
+                <li>**無 GIL 限制**：每個進程都有自己的 Python 解釋器和 GIL，因此可以實現真正的並行計算。</li>
+                <li>**適用場景**：科學計算、數據處理等 CPU 密集型任務。</li>
+            </ul>
+            <h3>範例 (多進程)</h3>
+            <pre><code class="language-python">import multiprocessing
+import time
+
+def worker(name):
+    print(f"Process {name}: Starting")
+    time.sleep(2)
+    print(f"Process {name}: Finishing")
+
+if __name__ == '__main__':
+    processes = []
+    for i in range(3):
+        p = multiprocessing.Process(target=worker, args=(f"{i}",))
+        processes.append(p)
+        p.start()
+
+    for p in processes:
+        p.join()
+    print("All processes finished.")</code></pre>
+        </section>
+
+        <section>
+            <h2>Web 框架</h2>
+            <p>Python 擁有豐富的 Web 框架，用於快速開發高效能的 Web 應用程式和 API。</p>
+            <h3>主流框架</h3>
+            <ul>
+                <li>**Django**：一個「大而全」的框架，提供了 ORM、管理後台、模板系統等所有必要組件，適合快速開發複雜的 Web 應用。</li>
+                <li>**Flask**：一個「小而精」的微框架，核心功能簡潔，高度可擴展，適合開發小型應用或 API 服務。</li>
+                <li>**FastAPI**：基於 Starlette 和 Pydantic 的現代 Web 框架，以其極高的性能和自動生成 API 文件而聞名，支持異步程式設計。</li>
+            </ul>
+            <h3>框架選擇考量</h3>
+            <ul>
+                <li>**專案規模和需求**：根據專案的複雜度和所需功能選擇。</li>
+                <li>**性能要求**：對性能有高要求的應用可能更適合 FastAPI。</li>
+                <li>**開發速度**：Django 提供了許多開箱即用的功能，可以加速開發。</li>
+                <li>**靈活性**：Flask 提供了更大的靈活性，允許開發者自由選擇組件。</li>
+            </ul>
+        </section>
+    </div>
+    </main>
+    
+    <script src="../js/textpage_script.js"></script>
+</body>
+</html>

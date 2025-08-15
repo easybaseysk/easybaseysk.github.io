@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 進階</title>
+    <link rel="stylesheet" href="../css/textpage_style.css">
+</head>
+<body>
+    <div class="container">
+    <a href="../index.html">&larr; 返回首頁</a>
+    <header>
+        <h1>JavaScript 進階</h1>
+    </header>
+    <main>
+        <section>
+            <h2>ES6+ 新特性</h2>
+            <p>ES6 (ECMAScript 2015) 引入了許多新的語法和功能，極大地提升了 JavaScript 的開發效率和程式碼可讀性。後續的 ES 版本也持續帶來改進。</p>
+            <h3>常用特性</h3>
+            <ul>
+                <li>**箭頭函數 (Arrow Functions)**：更簡潔的函數寫法，且沒有自己的 `this` 綁定。</li>
+                <li>**`let` 和 `const`**：塊級作用域的變數聲明，解決了 `var` 帶來的許多問題。</li>
+                <li>**模板字面量 (Template Literals)**：使用反引號 (`` ` ``) 定義字串，支持多行和嵌入表達式。</li>
+                <li>**解構賦值 (Destructuring Assignment)**：從陣列或物件中提取資料，賦值給變數。</li>
+                <li>**展開運算符 (Spread Operator)**：用於展開陣列或物件，常用於複製、合併或傳遞參數。</li>
+                <li>**類 (Classes)**：基於原型的語法糖，使物件導向程式設計更直觀。</li>
+                <li>**模組 (Modules)**：內建的模組系統，支持 `import` 和 `export`，實現程式碼的模組化。</li>
+                <li>**Promise**：處理非同步操作的物件，解決了回調地獄問題。</li>
+                <li>**生成器 (Generators)**：可以暫停和恢復執行的函數，用於處理迭代和非同步流程。</li>
+            </ul>
+            <h3>範例</h3>
+            <pre><code class="language-javascript">// 箭頭函數與模板字面量
+const greet = (name) => `Hello, ${name}!`;
+console.log(greet('World'));
+
+// 解構賦值
+const person = { firstName: 'John', lastName: 'Doe' };
+const { firstName, lastName } = person;
+console.log(firstName, lastName);
+
+// 展開運算符
+const arr1 = [1, 2];
+const arr2 = [...arr1, 3, 4];
+console.log(arr2);
+
+// Promise
+const fetchData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Data fetched!');
+    }, 1000);
+  });
+};
+
+fetchData().then(data => console.log(data));</code></pre>
+        </section>
+
+        <section>
+            <h2>非同步程式設計</h2>
+            <p>JavaScript 是單執行緒的，但通過非同步程式設計，它能夠處理耗時的操作（如網路請求、檔案讀取）而不會阻塞主執行緒。</p>
+            <h3>主要模式</h3>
+            <ul>
+                <li>**回調函數 (Callbacks)**：最基本的非同步處理方式，但容易導致「回調地獄」。</li>
+                <li>**Promise**：提供了一種更結構化的方式來處理非同步操作的成功和失敗。</li>
+                <li>**`async/await`**：基於 Promise 的語法糖，使得非同步程式碼看起來像同步程式碼一樣直觀，提高了可讀性。</li>
+            </ul>
+            <h3>`async/await` 範例</h3>
+            <pre><code class="language-javascript">async function getUserData() {
+  try {
+    const userResponse = await fetch('https://api.example.com/users/1');
+    const userData = await userResponse.json();
+    
+    const postsResponse = await fetch(`https://api.example.com/users/${userData.id}/posts`);
+    const userPosts = await postsResponse.json();
+
+    console.log('User Data:', userData);
+    console.log('User Posts:', userPosts);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+getUserData();</code></pre>
+        </section>
+
+        <section>
+            <h2>模組化</h2>
+            <p>模組化是將程式碼分割成獨立、可重用的單元，每個單元負責特定的功能。這有助於管理複雜的程式碼庫，提高可維護性和協作效率。</p>
+            <h3>常見模組系統</h3>
+            <ul>
+                <li>**CommonJS**：主要用於 Node.js 環境 (`require`, `module.exports`)。</li>
+                <li>**AMD (Asynchronous Module Definition)**：主要用於瀏覽器環境 (`define`, `require`)，如 RequireJS。</li>
+                <li>**ES Modules (ESM)**：ES6 引入的官方標準模組系統 (`import`, `export`)，現在廣泛應用於瀏覽器和 Node.js。</li>
+            </ul>
+            <h3>ES Modules 範例</h3>
+            <p><code>utils.js</code>:</p>
+            <pre><code class="language-javascript">// utils.js
+export const add = (a, b) => a + b;
+export const multiply = (a, b) => a * b;</code></pre>
+            <p><code>main.js</code>:</p>
+            <pre><code class="language-javascript">// main.js
+import { add, multiply } from './utils.js';
+
+console.log(add(5, 3));
+console.log(multiply(5, 3));</code></pre>
+        </section>
+
+        <section>
+            <h2>前端框架</h2>
+            <p>前端框架提供了一套結構和工具，用於快速構建複雜的單頁應用程式 (SPA) 和使用者介面。它們通常包含組件化、狀態管理、路由等功能。</p>
+            <h3>主流框架</h3>
+            <ul>
+                <li>**React**：由 Facebook 開發，基於組件化和虛擬 DOM，強調聲明式 UI。</li>
+                <li>**Vue.js**：漸進式框架，易於上手，靈活且高效。</li>
+                <li>**Angular**：由 Google 開發，提供完整的解決方案，適合大型企業級應用。</li>
+            </ul>
+            <h3>框架選擇考量</h3>
+            <ul>
+                <li>**專案規模和複雜度**：大型專案可能更適合功能齊全的框架。</li>
+                <li>**學習曲線**：不同框架的學習難度不同。</li>
+                <li>**社區支持和生態系統**：活躍的社區和豐富的庫可以加速開發。</li>
+                <li>**團隊熟悉度**：團隊成員對哪個框架更熟悉。</li>
+            </ul>
+        </section>
+    </div>
+    </main>
+    
+    <script src="../js/textpage_script.js"></script>
+</body>
+</html>

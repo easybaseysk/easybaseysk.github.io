@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 進階</title>
+    <link rel="stylesheet" href="../css/textpage_style.css">
+</head>
+<body>
+    
+    <div class="container">
+    <a href="../index.html">&larr; 返回首頁</a>
+    <header>
+        <h1>HTML 進階</h1>
+    </header>
+    <main>
+        <p>HTML 進階主題涵蓋了許多能讓網頁更具語義性、可維護性和可訪問性的技術。以下是一些重要的概念：</p>
+        <h2>語義化標籤 (Semantic HTML)</h2>
+        <p>語義化標籤是指使用具有明確含義的 HTML 元素來構建網頁結構，而不是僅僅使用 `div` 和 `span` 等通用容器。這有助於搜尋引擎、輔助技術（如螢幕閱讀器）以及開發者更好地理解網頁內容和結構。</p>
+        <ul>
+            <li><code>&lt;header&gt;</code>: 頁面或區塊的介紹性內容，通常包含標題、導航或標誌。</li>
+            <li><code>&lt;nav&gt;</code>: 導航連結的區塊。</li>
+            <li><code>&lt;main&gt;</code>: 頁面主要內容的區塊，每個頁面應只有一個。</li>
+            <li><code>&lt;article&gt;</code>: 獨立的、可獨立分發或重用的內容，如部落格文章、新聞報導。</li>
+            <li><code>&lt;section&gt;</code>: 文件的獨立區塊，通常帶有標題。</li>
+            <li><code>&lt;aside&gt;</code>: 與主要內容相關但可獨立存在的內容，如側邊欄、廣告。</li>
+            <li><code>&lt;footer&gt;</code>: 頁面或區塊的底部，通常包含版權信息、聯絡方式。</li>
+            <li><code>&lt;figure&gt;</code> 和 <code>&lt;figcaption&gt;</code>: 用於包含圖片、圖表、程式碼等，並提供標題。</li>
+        </ul>
+
+        <h2>Web Components</h2>
+        <p>Web Components 是一套 W3C 標準，允許開發者創建可重用、封裝的自定義 HTML 元素。它包含四個主要技術：</p>
+        <ul>
+            <li><strong>Custom Elements (自定義元素)</strong>: 允許你定義新的 HTML 標籤。</li>
+            <li><strong>Shadow DOM (影子 DOM)</strong>: 提供了一種將 DOM 和 CSS 封裝在組件內部的方式，使其不會影響到外部文檔的其他部分。</li>
+            <li><strong>HTML Templates (HTML 模板)</strong>: <code>&lt;template&gt;</code> 和 <code>&lt;slot&gt;</code> 元素允許你定義可重用的 HTML 結構，這些結構在頁面載入時不會被渲染。</li>
+            <li><strong>ES Modules (ES 模組)</strong>: 提供了一種標準化的方式來組織和重用 JavaScript 程式碼。</li>
+        </ul>
+
+        <h2>ARIA 屬性 (Accessible Rich Internet Applications)</h2>
+        <p>ARIA 屬性用於增強網頁的可訪問性，特別是對於使用輔助技術（如螢幕閱讀器）的用戶。它們提供了額外的語義信息，幫助輔助技術理解動態內容和自定義 UI 控制項的功能。</p>
+        <ul>
+            <li><code>role</code>: 定義元素的角色，例如 <code>role="button"</code>, <code>role="navigation"</code>。</li>
+            <li><code>aria-label</code>: 為元素提供一個可訪問的名稱，當元素沒有可見的文本標籤時很有用。</li>
+            <li><code>aria-labelledby</code>: 引用另一個元素的 ID，作為當前元素的可訪問名稱。</li>
+            <li><code>aria-describedby</code>: 引用另一個元素的 ID，作為當前元素的描述。</li>
+            <li><code>aria-expanded</code>: 指示元素（如手風琴菜單）的展開或折疊狀態。</li>
+            <li><code>aria-hidden</code>: 指示元素是否對輔助技術隱藏。</li>
+        </ul>
+        <p>正確使用這些進階 HTML 概念可以顯著提升網頁的品質、可維護性和用戶體驗。</p>
+    </div>
+    </main>
+    
+    <script src="../js/textpage_script.js"></script>
+</body>
+</html>
