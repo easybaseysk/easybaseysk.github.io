@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP 是什麼</title>
+    <link rel="stylesheet" href="../css/textpage_style.css">
+    <link href="../lib-css/prism-okaidia.min.css" rel="stylesheet" />
+    <style>
+        .home-icon {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #007bff;
+            z-index: 1000;
+        }
+        .home-icon:hover {
+            color: #0056b3;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            color: #444;
+            margin: 1.5rem 0 1rem;
+            border-left: 4px solid #007bff;
+            padding-left: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="thing">
+    
+        
+    <a href="../index.html">&larr; 返回首頁</a>
+    <h1>MCP 是什麼</h1>
+    <p>本篇文章將介紹 MCP (Model-Controller-Presenter) 的概念，這是一種在軟體開發中用於組織程式碼的架構模式。</p>
+
+    <h2>1. MCP 的定義</h2>
+    <p>MCP 是一種軟體架構模式，它將應用程式的邏輯分為三個互相連接的部分，分別是模型 (Model)、控制器 (Controller) 和展示器 (Presenter)。這種模式旨在實現關注點分離 (Separation of Concerns)，使得程式碼更容易維護、測試和擴展。</p>
+
+    <h2>2. MCP 的核心組成</h2>
+    <ul>
+        <li><b>模型 (Model)</b>：負責處理應用程式的資料和業務邏輯。它不關心資料如何被顯示，只專注於資料本身的管理。</li>
+        <li><b>控制器 (Controller)</b>：接收使用者的輸入，並根據輸入調用模型和展示器來更新資料和視圖。它是模型和展示器之間的協調者。</li>
+        <li><b>展示器 (Presenter)</b>：從模型中獲取資料，並將其格式化後傳遞給視圖 (View) 進行顯示。它負責處理所有與顯示相關的邏輯。</li>
+    </ul>
+
+    <h2>3. MCP 與 MVC 的比較</h2>
+    <p>MCP 模式與常見的 MVC (Model-View-Controller) 模式非常相似，但主要區別在於展示器 (Presenter) 的角色。在 MVC 中，視圖可以直接從模型中獲取資料；而在 MCP 中，展示器作為中介，負責從模型獲取資料並提供給視圖，這使得視圖變得更加被動和簡單。</p>
+
+    <h2>4. MCP 的優點</h2>
+    <ul>
+        <li><b>高度的模組化</b>：各個組件職責分明，易於獨立開發和測試。</li>
+        <li><b>易於維護</b>：修改一個組件不會輕易影響到其他組件。</li>
+        <li><b>更好的可測試性</b>：由於業務邏輯和顯示邏輯分離，可以針對各個部分進行單元測試。</li>
+    </ul>
+
+    </div>
+    <script src="../lib-js/prism.min.js"></script>
+    <script>Prism.highlightAll();</script>
+    <script src="../js/textpage_script.js"></script>
+</body>
+</html>

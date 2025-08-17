@@ -13,7 +13,16 @@ body {
     border-radius: 8px;
 }
 h1 {
-    color: var(--textColor);
+    color: #333;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.5rem;
+}
+h2 {
+    color: #444;
+    margin: 1.5rem 0 1rem;
+    border-left: 4px solid #007bff;
+    padding-left: 0.75rem;
 }
 a {
     color: var(--textColor);
@@ -21,4 +30,86 @@ a {
 }
 a:hover {
     text-decoration: underline;
+}
+.home-icon {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #007bff;
+    z-index: 1000;
+}
+.home-icon:hover {
+    color: #0056b3;
+}
+.home-icon {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #007bff;
+    z-index: 1000;
+}
+.home-icon:hover {
+    color: #0056b3;
+}
+h1 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.5rem;
+}
+h2 {
+    color: #444;
+    margin: 1.5rem 0 1rem;
+    border-left: 4px solid #007bff;
+    padding-left: 0.75rem;
+}
+#content {
+    min-height: 150px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fafafa;
+    position: relative;
+}
+.page-number {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    color: #666;
+    font-size: 0.9rem;
+}
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    
+    margin-top: 1.5rem;
+}
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+button:hover {
+    opacity: 0.9;
+}
+.btn-prev {
+    background-color: #007bff;
+    color: white;
+}
+.btn-next {
+    background-color: #007bff;
+    color: white;
+}
+.btn-random {
+    background-color: #28a745;
+    color: white;
 }

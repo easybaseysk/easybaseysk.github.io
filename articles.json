@@ -1,5 +1,5 @@
 {
-  "categories": ["前端", "後端", "工具", "基礎", "進階"],
+  "categories": ["前端", "後端", "工具", "基礎", "進階", "AI"],
   "articles": [
 
 
@@ -90,6 +90,20 @@
 
       "url": "./articles/00007.html",
       "tags": ["前端","後端", "進階"]
+    },
+    {
+      "id": "00008",
+      "title": "AI Agent 是什麼",
+      "description": "本篇文章將介紹 AI Agent 的概念、組成部分以及應用場景。",
+      "url": "./articles/00008.html",
+      "tags": ["AI", "進階"]
+    },
+    {
+      "id": "00009",
+      "title": "MCP 是什麼",
+      "description": "本篇文章將介紹 MCP (Model-Controller-Presenter) 的概念，這是一種在軟體開發中用於組織程式碼的架構模式。",
+      "url": "./articles/00009.html",
+      "tags": ["AI", "進階"]
     }
   ]
 }
