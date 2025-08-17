@@ -82,6 +82,14 @@
       "description": "RAID 技術與常見級別介紹",
       "url": "articles/00006.html",
       "tags": ["工具", "基礎"]
+    },
+    {
+      "id": "00007",
+      "title": "如何製作電子版答案之書",
+      "description": "本教學將引導您從零開始，使用html, css, javascript 製作一個簡單的電子版答案之書網頁。",
+
+      "url": "./articles/00007.html",
+      "tags": ["前端","後端", "進階"]
     }
   ]
 }

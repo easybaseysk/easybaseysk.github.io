@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何製作電子版答案之書</title>
+    <link rel="stylesheet" href="../css/textpage_style.css">
+    <link href="../lib-css/prism-okaidia.min.css" rel="stylesheet" />
+    <style>
+        /* CSS 樣式部分 */
+        .home-icon {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #007bff;
+            z-index: 1000;
+        }
+        .home-icon:hover {
+            color: #0056b3;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            color: #444;
+            margin: 1.5rem 0 1rem;
+            border-left: 4px solid #007bff;
+            padding-left: 0.75rem;
+        }
+        #content {
+            min-height: 150px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+            position: relative;
+        }
+        .page-number {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            
+            margin-top: 1.5rem;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .btn-prev {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-next {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-random {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="thing">
+    
+        
+    <a href="../index.html">&larr; 返回首頁</a>
+    <h1>如何製作電子版答案之書</h1>
+    <p>本教學將引導您從零開始，製作一個簡單的電子版答案之書網頁。這個網頁可以隨機顯示預設的答案，也可以手動切換。</p>
+    <p><a href="../extrahtml/answerbook.html"><button style="background-color: #4CAF50; color: white;">看成品</button></a></p>
+    
+
+    <h2>1. HTML 結構</h2>
+    <p>首先，我們來建立網頁的基本 HTML 結構。這包括頁面標題、內容顯示區域和控制按鈕。</p>
+    <pre><code class="language-html">&lt;!DOCTYPE html&gt; &lt;!-- 宣告文件類型為 HTML5 --&gt;
+&lt;html lang="zh-Hant"&gt; &lt;!-- 設定網頁語言為繁體中文 --&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt; &lt;!-- 設定字元編碼為 UTF-8，確保中文顯示正常 --&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;!-- 設定視口，使網頁在不同設備上響應式顯示 --&gt;
+    &lt;title&gt;電子版答案之書&lt;/title&gt; &lt;!-- 設定網頁標題，顯示在瀏覽器標籤頁上 --&gt;
+    &lt;!-- CSS 樣式將在這裡引入 --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div style="background-color: white; width: 100%; height: 80px;padding: 10px; position: fixed; top: 0; left: 0; z-index: 1000;"&gt; 
+        &lt;!-- 頂部固定導航欄，包含返回主頁的圖標 --&gt;
+        &lt;div class="home-icon" onclick="goHome()"&gt;&lt;img src="../icon/光.png" style="width: 75px;height: 75px;"&gt;&lt;/div&gt; 
+        &lt;!-- 點擊圖標時觸發 goHome() 函數，返回主頁 --&gt;
+    &lt;/div&gt; 
+    &lt;br&gt; &lt;!-- 換行，用於調整佈局 --&gt;
+    &lt;div class="container"&gt; &lt;!-- 主要內容容器，用於包裹答案之書的內容 --&gt;
+        &lt;h1&gt;電子版答案之書&lt;/h1&gt; &lt;!-- 網頁主標題 --&gt;
+        &lt;div id="content"&gt;歡迎使用電子版答案之書！請點擊按鈕開始探索。&lt;/div&gt; &lt;!-- 顯示答案內容的區域 --&gt;
+        &lt;div class="btn-group"&gt; &lt;!-- 按鈕組，包含上一頁、隨機和下一頁按鈕 --&gt;
+            &lt;button class="btn-prev" onclick="changePage('pre')"&gt;上一頁&lt;/button&gt; &lt;!-- 上一頁按鈕，點擊時觸發 changePage('pre') --&gt;
+            &lt;button class="btn-random" onclick="changePage('random')"&gt;隨機&lt;/button&gt; &lt;!-- 隨機按鈕，點擊時觸發 changePage('random') --&gt;
+            &lt;button class="btn-next" onclick="changePage('next')"&gt;下一頁&lt;/button&gt; &lt;!-- 下一頁按鈕，點擊時觸發 changePage('next') --&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- JavaScript 程式碼將在這裡引入 --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h2>2. CSS 樣式</h2>
+    <p>接下來，我們為網頁添加樣式，使其看起來更美觀。您可以將以下 CSS 程式碼放入 <code>&lt;head&gt;</code> 標籤內的 <code>&lt;style&gt;</code> 標籤中。</p>
+    <pre><code class="language-css">body {
+    font-family: Arial, sans-serif; /* 設定字體 */
+    background-color: #f8f9fa; /* 設定背景顏色 */
+    padding: 20px; /* 設定內邊距 */
+    display: flex; /* 使用 Flexbox 佈局 */
+    justify-content: center; /* 水平居中內容 */
+    align-items: center; /* 垂直居中內容 */
+    min-height: 100vh; /* 最小高度為視口高度 */
+    margin: 0; /* 移除外邊距 */
+}
+.container {
+    width: 600px;  /* 固定寬度 */
+    height: 400px;  /* 固定高度 */
+    background: white; /* 背景為白色 */
+    padding: 2rem; /* 內邊距 */
+    border-radius: 10px; /* 圓角邊框 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 陰影效果 */
+    text-align: center; /* 文字居中 */
+    overflow: auto;  /* 添加滾動條以防內容溢出 */
+    position: relative; /* 添加相對定位以便放置主頁圖標 */
+}
+.home-icon {
+    position: fixed; /* 固定定位 */
+    top: 10px; /* 距離頂部 10px */
+    left: 10px; /* 距離左側 10px */
+    font-size: 24px; /* 字體大小 */
+    cursor: pointer; /* 鼠標懸停時顯示手型 */
+    color: #007bff; /* 顏色 */
+    z-index: 1000; /* 層級 */
+}
+.home-icon:hover {
+    color: #0056b3; /* 鼠標懸停時顏色變深 */
+}
+h1 {
+    color: #333; /* 標題顏色 */
+    margin-bottom: 1.5rem; /* 底部外邊距 */
+}
+#content {
+    min-height: 150px; /* 最小高度 */
+    padding: 1rem; /* 內邊距 */
+    margin: 1rem 0; /* 上下外邊距 */
+    border: 1px solid #ddd; /* 邊框 */
+    border-radius: 5px; /* 圓角 */
+    background-color: #fafafa; /* 背景顏色 */
+    position: relative; /* 相對定位 */
+}
+.page-number {
+    position: absolute; /* 絕對定位 */
+    bottom: 5px; /* 距離底部 5px */
+    right: 10px; /* 距離右側 10px */
+    color: #666; /* 顏色 */
+    font-size: 0.9rem; /* 字體大小 */
+}
+.btn-group {
+    display: flex; /* 使用 Flexbox 佈局 */
+    justify-content: center; /* 水平居中 */
+    gap: 1rem; /* 元素間距 */
+    
+    margin-top: 1.5rem; /* 頂部外邊距 */
+}
+button {
+    padding: 0.5rem 1rem; /* 內邊距 */
+    border: none; /* 無邊框 */
+    border-radius: 5px; /* 圓角 */
+    cursor: pointer; /* 鼠標懸停時顯示手型 */
+    font-size: 1rem; /* 字體大小 */
+    transition: background-color 0.3s; /* 背景顏色過渡效果 */
+}
+button:hover {
+    opacity: 0.9; /* 鼠標懸停時透明度降低 */
+}
+.btn-prev {
+    background-color: #007bff; /* 背景顏色 */
+    color: white; /* 文字顏色 */
+}
+.btn-next {
+    background-color: #007bff; /* 背景顏色 */
+    color: white; /* 文字顏色 */
+}
+.btn-random {
+    background-color: #28a745; /* 背景顏色 */
+    color: white; /* 文字顏色 */
+}</code></pre>
+
+    <h2>3. JavaScript 邏輯</h2>
+    <p>最後，我們添加 JavaScript 程式碼來實現答案之書的互動功能，包括顯示內容、切換頁面和隨機顯示答案。將以下程式碼放入 <code>&lt;body&gt;</code> 標籤結束前的 <code>&lt;script&gt;</code> 標籤中。</p>
+    <style>
+        pre {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+    </style>
+    <pre><code class="language-javascript">const pages = [ // 定義一個包含所有答案文本的陣列
+    "歡迎使用電子版答案之書！請點擊按鈕開始探索。",
+    "或許是時候了，但請再想想。",
+    "耐心等待，答案會自然浮現。",
+    "你的直覺可能已經告訴你了。",
+    "時機尚未成熟，再等等看。",
+    "嘗試看看，結果可能出乎意料。",
+    "換個角度思考，或許會有新發現。",
+    "機會就在那裡，但需要你主動。",
+    "保持開放，答案可能不止一個。",
+    "目標很重要，但過程也值得珍惜。",
+    "聽聽別人的看法，但最終決定在你。",
+    "事情可能沒有表面那麼簡單。",
+    "答案可能藏在細節之中。",
+    "有時候，不做決定也是一種決定。",
+    "結果可能取決於你的行動。",
+    "這是一個需要深思熟慮的問題。",
+    "答案可能隨著時間而改變。",
+    "你的選擇會影響未來的方向。",
+    "這是一個值得深入探討的問題。",
+    "答案可能就在你的內心深處。",
+    "這是一個需要勇氣面對的問題。",
+    "結果可能取決於你的態度。",
+    "這是一個需要智慧來解答的問題。",
+    "答案可能藏在你的經驗之中。",
+    "這是一個需要耐心等待的問題。",
+    "結果可能取決於你的決心。",
+    "這是一個需要勇氣來面對的問題。",
+    "答案可能藏在你的觀察之中。",
+    "這是一個需要時間來解答的問題。",
+    "結果可能取決於你的選擇。",
+    "這是一個需要深思的問題。",
+    "答案可能藏在你的思考之中。",
+    "這是一個需要勇氣來回答的問題。",
+    "結果可能取決於你的行動。",
+    "這是一個需要智慧來面對的問題。",
+    "答案可能藏在你的經驗之中。",
+    "這是一個需要耐心來解答的問題。",
+    "結果可能取決於你的決心。",
+    "這是一個需要勇氣來面對的問題。",
+    "答案可能藏在你的觀察之中。",
+    "這是一個需要時間來解答的問題。",
+    "結果可能取決於你的選擇。",
+    "這是一個需要深思的問題。",
+    "答案可能藏在你的思考之中。",
+    "這是一個需要勇氣來回答的問題。",
+    "結果可能取決於你的行動。",
+    "這是一個需要智慧來面對的問題。",
+    "答案可能藏在你的經驗之中。",
+    "這是一個需要耐心來解答的問題。",
+    "結果可能取決於你的決心。"
+];
+
+let currentPage = 0; // 初始化當前頁碼為 0
+document.getElementById('content').innerHTML = `
+    ${pages[currentPage]} // 顯示當前頁面的內容
+    &lt;div class="page-number"&gt;第 ${currentPage + 1} 頁&lt;/div&gt; // 顯示頁碼
+`;
+
+function changePage(action) { // 定義切換頁面的函數
+    if (action === 'pre') { // 如果動作是 'pre' (上一頁)
+        currentPage = Math.max(0, currentPage - 1); // 頁碼減 1，但不小於 0
+    } else if (action === 'next') { // 如果動作是 'next' (下一頁)
+        currentPage = Math.min(pages.length - 1, currentPage + 1); // 頁碼加 1，但不超過最大頁碼
+    } else if (action === 'random') { // 如果動作是 'random' (隨機)
+        currentPage = Math.floor(Math.random() * (pages.length - 1)) + 1; // 生成一個隨機頁碼
+    }
+    document.getElementById('content').innerHTML = `
+        ${pages[currentPage]} // 更新顯示內容
+        &lt;div class="page-number"&gt;第 ${currentPage + 1} 頁&lt;/div&gt; // 更新頁碼顯示
+    `;
+}
+
+</code></pre>
+
+    <p>透過以上步驟，您就可以建立一個功能完整的電子版答案之書網頁。您可以根據自己的需求修改 <code>pages</code> 陣列中的內容，或者調整 CSS 樣式來改變網頁的外觀。</p>
+    
+    </div>
+    <script src="../lib-js/prism.min.js"></script>
+    <script src="../lib-js/prism-markup.min.js"></script>
+    <script src="../lib-js/prism-css.min.js"></script>
+    <script src="../lib-js/prism-javascript.min.js"></script>
+    <script>Prism.highlightAll();</script>
+    <script src="../js/textpage_script.js"></script>
+</body>
+</html>
