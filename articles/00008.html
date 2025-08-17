@@ -3,33 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Agent 是什麼</title>
+    <title>什麼是 AI Agent</title>
     <link rel="stylesheet" href="../css/textpage_style.css">
-    <link href="../lib-css/prism-okaidia.min.css" rel="stylesheet" />
     <style>
-        .home-icon {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #007bff;
-            z-index: 1000;
+        #d3_container {
+            width: 100%;
+            height: 400px;
+            border: solid 1px #ccc;
+            margin-top: 20px;
         }
-        .home-icon:hover {
-            color: #0056b3;
+        .node circle {
+            fill: #fff;
+            stroke: steelblue;
+            stroke-width: 3px;
         }
-        h1 {
-            color: #333;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 0.5rem;
+        .node text {
+            font: 12px sans-serif;
         }
-        h2 {
-            color: #444;
-            margin: 1.5rem 0 1rem;
-            border-left: 4px solid #007bff;
-            padding-left: 0.75rem;
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2px;
         }
     </style>
 </head>
@@ -53,6 +47,8 @@
         <li><b>學習 (Learning)</b>：根據行動的結果和反饋，不斷優化自身的決策模型，提升未來表現。</li>
     </ul>
 
+    <div id="d3_container"></div>
+
     <h2>3. AI Agent 的應用</h2>
     <p>AI Agent 的應用非常廣泛，涵蓋了各個領域：</p>
     <ul>
@@ -64,8 +60,74 @@
     </ul>
 
     </div>
-    <script src="../lib-js/prism.min.js"></script>
-    <script>Prism.highlightAll();</script>
-    <script src="../js/textpage_script.js"></script>
+    <script src="../lib-js/d3.js"></script>
+    <script>
+        const data = {
+            "name": "AI Agent",
+            "children": [
+                {
+                    "name": "感知 (Perception)",
+                    "children": [
+                        { "name": "感測器 (攝影機、麥克風、API)" }
+                    ]
+                },
+                {
+                    "name": "決策 (Decision-Making)",
+                    "children": [
+                        { "name": "大腦 (大型語言模型)" }
+                    ]
+                },
+                {
+                    "name": "行動 (Action)",
+                    "children": [
+                        { "name": "執行器 (機械手臂、API 呼叫)" }
+                    ]
+                },
+                {
+                    "name": "學習 (Learning)",
+                    "children": [
+                        { "name": "從經驗中學習" }
+                    ]
+                }
+            ]
+        };
+
+        const width = document.getElementById('d3_container').offsetWidth;
+        const height = document.getElementById('d3_container').offsetHeight;
+
+        const tree = d3.tree().size([height, width - 280]);
+
+        const root = d3.hierarchy(data);
+        tree(root);
+
+        const svg = d3.select("#d3_container").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(80,0)");
+
+        const link = svg.selectAll(".link")
+            .data(root.links())
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", d3.linkHorizontal()
+                .x(d => d.y)
+                .y(d => d.x));
+
+        const node = svg.selectAll(".node")
+            .data(root.descendants())
+            .enter().append("g")
+            .attr("class", d => "node" + (d.children ? " node--internal" : " node--leaf"))
+            .attr("transform", d => `translate(${d.y},${d.x})`);
+
+        node.append("circle")
+            .attr("r", 10);
+
+        node.append("text")
+            .attr("dy", ".35em")
+            .attr("x", d => d.children ? -13 : 13)
+            .style("text-anchor", d => d.children ? "end" : "start")
+            .text(d => d.data.name);
+    </script>
 </body>
 </html>
