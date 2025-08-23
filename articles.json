@@ -1,5 +1,5 @@
 {
-  "categories": ["前端", "後端", "工具", "基礎", "進階", "AI"],
+  "categories": ["前端", "後端", "工具", "基礎", "進階", "AI", "生活","拍攝","烘焙"],
   "articles": [
 
 
@@ -104,6 +104,83 @@
       "description": "本篇文章將介紹 MCP (Model-Controller-Presenter) 的概念，這是一種在軟體開發中用於組織程式碼的架構模式。",
       "url": "./articles/00009.html",
       "tags": ["AI", "進階"]
+    },
+    {
+      "id": "00010",
+      "title": "咖啡沖煮的藝術",
+      "description": "探索完美一杯咖啡背後的科學與藝術。",
+      "url": "./articles/00010.html",
+      "tags": ["生活"]
+    },
+    {
+      "id": "00011",
+      "title": "正念的力量",
+      "description": "學習如何透過正念練習，在忙碌的生活中找到平靜。",
+      "url": "./articles/00011.html",
+      "tags": ["生活"]
+    },
+    {
+      "id": "00012",
+      "title": "投資理財入門",
+      "description": "為您的財務未來打下堅實的基礎。",
+      "url": "./articles/00012.html",
+      "tags": ["生活"]
+    },
+    {
+      "id": "00013",
+      "title": "攝影入門：構圖技巧",
+      "description": "學習基礎的攝影構圖技巧，拍出更吸引人的照片。",
+      "url": "./articles/00013.html",
+      "tags": ["生活","拍攝"]
+    },
+    {
+      "id": "00014",
+      "title": "烘焙基礎",
+      "description": "從零開始，探索烘焙的樂趣。",
+      "url": "./articles/00014.html",
+      "tags": ["生活","烘焙"]
+    },
+    {
+      "id": "00015",
+      "title": "說故事的藝術",
+      "description": "學習如何講一個好故事，無論是在寫作、演講還是日常交流中。",
+      "url": "./articles/00015.html",
+      "tags": ["生活"]
+    },
+    {
+      "id": "00016",
+      "title": "繪畫入門：基礎技巧",
+      "description": "釋放你的創造力，從學習繪畫的基本技巧開始。",
+      "url": "./articles/00016.html",
+      "tags": ["生活"]
+    },
+    {
+      "id": "00017",
+      "title": "規律運動的好處",
+      "description": "探索運動如何改善你的身體和心理健康。",
+      "url": "./articles/00017.html",
+      "tags": ["生活"]
+    },
+    {
+      "id": "00018",
+      "title": "聆聽的藝術",
+      "description": "成為一個更好的溝通者，從學會真正地聆聽開始。",
+      "url": "./articles/00018.html",
+      "tags": ["生活"]
+    },
+    {
+      "id": "00019",
+      "title": "園藝入門：打造你的綠色角落",
+      "description": "無論你擁有的是一個大花園還是一個小陽台，園藝都能為你的生活增添綠意和樂趣。",
+      "url": "./articles/00019.html",
+      "tags": ["生活"]
+    },
+    {
+      "id": "00020",
+      "title": "閱讀的力量",
+      "description": "探索書本如何開闊你的視野，豐富你的內心世界。",
+      "url": "./articles/00020.html",
+      "tags": ["生活"]
     }
   ]
 }
