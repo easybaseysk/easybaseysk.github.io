@@ -120,6 +120,49 @@
             top: 60px;
         }
 
+        /* RAID Selector Styles */
+        .raid-selector-container {
+            margin: 40px 0;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        #recommend-raid {
+            padding: 10px 15px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        #recommend-raid:hover {
+            background-color: #45a049;
+        }
+        #recommendation-result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+        }
+
+
     </style>
 </head>
 <body>
@@ -135,6 +178,32 @@
             <li><strong>效能提升 (Performance Enhancement)</strong>：RAID 不僅是個保鑣，還是個速度狂！它能讓多個硬碟同時讀寫資料，就像多條高速公路同時運作，資料傳輸速度瞬間飆升，讓你體驗飛一般的感覺！</li>
             <li><strong>儲存容量擴展 (Storage Capacity Expansion)</strong>：你的資料越來越多，單一硬碟不夠用了怎麼辦？RAID 能把多個小硬碟變成一個超大的「儲物櫃」，輕鬆擴展你的儲存空間，再多資料也不怕！</li>
         </ul>
+
+        <h2>RAID 智能選擇器：幫你找到最適合的 RAID！</h2>
+        <div class="raid-selector-container">
+            <div class="form-group">
+                <label for="disk-count">你有多少個硬碟？</label>
+                <input type="number" id="disk-count" min="1" value="4">
+            </div>
+            <div class="form-group">
+                <label for="security-level">資料安全性要求：</label>
+                <select id="security-level">
+                    <option value="low">低（可接受資料遺失）</option>
+                    <option value="medium" selected>中（需要基本保護）</option>
+                    <option value="high">高（絕對不能遺失資料）</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="speed-level">速度要求：</label>
+                <select id="speed-level">
+                    <option value="low">一般</option>
+                    <option value="medium" selected>讀寫速度快</option>
+                    <option value="high">極致讀寫速度</option>
+                </select>
+            </div>
+            <button id="recommend-raid">幫我推薦！</button>
+            <div id="recommendation-result"></div>
+        </div>
 
         <h2>RAID 家族成員：認識不同的超級英雄組合</h2>
         <p>RAID 家族有許多不同的成員，每個成員都有其獨特的技能組合，適用於不同的任務：</p>
@@ -215,5 +284,43 @@
     <script src="../lib-js/anime.js"></script>
     <script src="../js/textpage_script.js"></script>
     <script src="../js/raid_animation.js"></script>
+    <script>
+        document.getElementById('recommend-raid').addEventListener('click', function() {
+            const diskCount = parseInt(document.getElementById('disk-count').value);
+            const security = document.getElementById('security-level').value;
+            const speed = document.getElementById('speed-level').value;
+            const resultDiv = document.getElementById('recommendation-result');
+
+            let recommendation = '';
+
+            if (diskCount === 1) {
+                recommendation = '<h3>單一硬碟</h3><p>只有一顆硬碟，無法組成 RAID。建議至少擁有兩顆或更多硬碟以利用 RAID 技術提升資料安全性或效能。</p>';
+            } else if (security === 'high') {
+                if (speed === 'high' && diskCount >= 4 && diskCount % 2 === 0) {
+                    recommendation = '<h3>推薦：RAID 10</h3><p>RAID 10 提供了最佳的效能和資料安全性，是需要極致讀寫速度和高度資料保護的理想選擇。它結合了 RAID 1 的鏡像和 RAID 0 的條帶化，但成本較高，需要至少 4 顆硬碟。</p>';
+                } else if (diskCount >= 4) {
+                    recommendation = '<h3>推薦：RAID 6</h3><p>RAID 6 提供雙重奇偶校驗，可以容忍兩顆硬碟同時故障，提供了極高的資料安全性。適合存放關鍵資料，需要至少 4 顆硬碟。</p>';
+                } else {
+                    recommendation = '<h3>推薦：RAID 1</h3><p>RAID 1 透過資料鏡像提供了絕佳的資料保護。如果您的硬碟數量有限但又需要高安全性，這是一個很好的選擇。需要至少 2 顆硬碟。</p>';
+                }
+            } else if (security === 'medium') {
+                if (speed === 'high' && diskCount >= 2) {
+                    recommendation = '<h3>推薦：RAID 0</h3><p>RAID 0 提供了最佳的讀寫效能，但沒有資料冗餘。如果速度是您的首要考量，且可以接受資料遺失的風險，這是一個好選擇。';
+                } else if (diskCount >= 3) {
+                    recommendation = '<h3>推薦：RAID 5</h3><p>RAID 5 在效能、容量和安全性之間取得了很好的平衡，是目前最受歡迎的 RAID 級別之一。它可以容忍一顆硬碟故障，需要至少 3 顆硬碟。</p>';
+                } else {
+                    recommendation = '<h3>推薦：RAID 1</h3><p>RAID 1 透過資料鏡像提供了不錯的資料保護，適合在硬碟數量不多時，用於保護重要資料。需要至少 2 顆硬碟。</p>';
+                }
+            } else { // low security
+                if (speed === 'high' && diskCount >= 2) {
+                    recommendation = '<h3>推薦：RAID 0</h3><p>RAID 0 提供了極致的效能，非常適合用於暫存檔或影音編輯等對速度要求高但資料可犧牲的場景。它沒有資料保護功能。';
+                } else {
+                    recommendation = '<h3>提示</h3><p>在低安全性需求下，您可以選擇將硬碟獨立使用（JBOD），或考慮使用 RAID 0 來獲取最大容量和效能。請注意，這兩種方式都沒有資料保護。';
+                }
+            }
+
+            resultDiv.innerHTML = recommendation;
+        });
+    </script>
 </body>
 </html>
